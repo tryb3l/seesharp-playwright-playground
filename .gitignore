@@ -1,0 +1,77 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (Mono Auto Generated)
+mono_crash.*
+
+# User-specific files (VSCode)
+.vscode/*
+
+# User-specific files (JetBrains Rider)
+.idea/
+*.sln.iml
+
+# Mono auto generated files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+# The packages folder can be ignored because of the presence of 'project.assets.json' in the obj folder
+# except build/, which is used as an MSBuild target.
+!packages/build/
+
+# Uncomment if necessary however generally it will be regenerated when needed
+#*.props
+#*.targets
+
+# Microsoft Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Coverlet Coverage Output
+coverage.opencover.xml
+coverage.cobertura.xml
+coverage.json
+coverage.info
+coverage.lcov
+coverage.xml
+coverage.opencover.xml
+coverage.cobertura.xml
+coverage.json
+coverage.info
+coverage.lcov
+coverage.xml
+
+# Playwright
+.playwright/
