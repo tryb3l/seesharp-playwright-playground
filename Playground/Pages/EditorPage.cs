@@ -1,4 +1,3 @@
-
 using Microsoft.Playwright;
 using Playground.Components;
 using Playground.Config;
