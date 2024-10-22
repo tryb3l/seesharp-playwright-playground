@@ -1,0 +1,78 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.Playwright;
+using NUnit.Framework;
+using Playground.Config;
+using Playground.Factories;
+using Playground.Helpers;
+using Playground.Services;
+using Serilog;
+
+namespace Playground.Tests;
+
+public class BaseTest
+{
+    protected IPage Page;
+    protected IBrowser Browser;
+    protected ILogger Logger;
+    protected ConfigSettings? Config;
+
+    [SetUp]
+    public async Task Setup()
+    {
+        Logger = Log.Logger;
+        var config = ConfigSettings.LoadConfig();
+
+        var playwright = await Playwright.CreateAsync();
+        Browser = await playwright[config.Browser].LaunchAsync(new BrowserTypeLaunchOptions { Headless = config.Headless });
+
+        var contextOptions = new BrowserNewContextOptions();
+
+        var testCategories = TestContext.CurrentContext.Test.Properties["Category"];
+        bool runAsSignedInUser = testCategories.Contains("SignedIn");
+
+        if (runAsSignedInUser)
+        {
+            if (!File.Exists("auth.json"))
+            {
+                Logger.Information("No existing authentication state found. Registering new user via API.");
+
+                var userFactory = new UserFactory();
+                string email = $"testUser_{Guid.NewGuid()}@example.com";
+                string password = "password123";
+
+                var token = await userFactory.CreateUserAsync(email, password);
+
+                await AuthHelper.SaveAuthTokenAsync(token);
+            }
+            else
+            {
+                Logger.Information("Using existing authentication state from auth.json.");
+            }
+            contextOptions.StorageStatePath = "auth.json";
+        }
+        else
+        {
+            Logger.Information("Running test as not signed-in user.");
+        }
+        var context = await Browser.NewContextAsync(contextOptions);
+        Page = await context.NewPageAsync();
+
+    }
+
+    [TearDown]
+    public async Task Teardown()
+    {
+        try
+        {
+            await Browser.CloseAsync();
+            Logger.Information("Browser closed.");
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "An error occurred during browser teardown.");
+            throw;
+        }
+    }
+}
