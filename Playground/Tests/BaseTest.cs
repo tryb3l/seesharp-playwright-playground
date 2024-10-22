@@ -1,12 +1,7 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using Microsoft.Playwright;
-using NUnit.Framework;
 using Playground.Config;
 using Playground.Factories;
 using Playground.Helpers;
-using Playground.Services;
 using Serilog;
 
 namespace Playground.Tests;
@@ -69,9 +64,9 @@ public class BaseTest
             await Browser.CloseAsync();
             Logger.Information("Browser closed.");
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Logger.Error(ex, "An error occurred during browser teardown.");
+            Logger.Error(e, "An error occurred during browser teardown.");
             throw;
         }
     }
