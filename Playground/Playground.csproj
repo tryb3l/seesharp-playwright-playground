@@ -36,4 +36,8 @@
     <Using Include="System.Threading.Tasks" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include=".github/workflows/" />
+  </ItemGroup>
+
 </Project>
