@@ -20,9 +20,9 @@ public class AuthHelper
                 {
                     name = "jwt",
                     value = token,
-                     domain = new Uri(baseURL).Host,
+                    domain = new Uri(baseURL).Host,
                     path = "/",
-                    expires = DateTimeOffset.UtcNow.AddDays(1),
+                    expires = expiration,
                     httpOnly = false,
                     secure = false,
                     sameSite = "Lax",
@@ -34,5 +34,4 @@ public class AuthHelper
         await File.WriteAllTextAsync("auth.json", json);
         Logger.Information("Token saved to auth.json");
     }
-
 }
