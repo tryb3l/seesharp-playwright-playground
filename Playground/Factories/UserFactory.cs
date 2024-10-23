@@ -1,7 +1,4 @@
-using System;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
 using Playground.Config;
 using Serilog;
 
@@ -33,6 +30,7 @@ public class UserFactory
         try
         {
             _logger.Information("Creating user via API with email '{Email}'", email);
+
             var response = await _httpClient.PostAsJsonAsync("/api/users", payload);
             response.EnsureSuccessStatusCode();
 
@@ -62,6 +60,7 @@ public class UserFactory
         try
         {
             _logger.Information("Logging in user via API with email '{Email}'", email);
+
             var response = await _httpClient.PostAsJsonAsync("/api/users/login", payload);
             response.EnsureSuccessStatusCode();
 
@@ -69,7 +68,7 @@ public class UserFactory
             string token = content!.user.token;
 
             _logger.Information("User logged in and token received");
-            _logger.Information("User logged in and token received");
+
             return token;
         }
         catch (Exception e)
