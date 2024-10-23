@@ -30,8 +30,11 @@ public class AuthHelper
             },
             origins = new object[] { }
         };
+
         var json = JsonConvert.SerializeObject(storageState, Formatting.Indented);
+
         await File.WriteAllTextAsync("auth.json", json);
+
         Logger.Information("Token saved to auth.json");
     }
 }
