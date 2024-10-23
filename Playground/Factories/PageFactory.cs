@@ -1,6 +1,5 @@
-using System;
 using Microsoft.Playwright;
-using Playground.Pages;
+using Playground.Base;
 
 namespace Playground.Factories;
 
