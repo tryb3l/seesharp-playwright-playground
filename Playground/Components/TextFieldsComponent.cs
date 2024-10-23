@@ -1,6 +1,5 @@
 using Microsoft.Playwright;
-using Serilog;
-using Serilog.Core;
+using Playground.Base;
 
 namespace Playground.Components;
 
@@ -13,7 +12,9 @@ public class TextFieldsComponent(IPage page) : BaseComponent
         try
         {
             Logger.Information("Filling input with placeholder '{Placeholder}'", placeholder);
+
             await Page.FillAsync($"[placeholder='{placeholder}']", text);
+
             Logger.Information("Successfully filled input with placeholder '{Placeholder}'", placeholder);
         }
         catch (Exception e)
@@ -28,7 +29,9 @@ public class TextFieldsComponent(IPage page) : BaseComponent
         try
         {
             Logger.Information("Filling input with selector '{Selector}'", selector);
+
             await Page.FillAsync(selector, text);
+
             Logger.Information("Successfully filled input with selector '{Selector}'", selector);
         }
         catch (Exception ex)
@@ -43,7 +46,9 @@ public class TextFieldsComponent(IPage page) : BaseComponent
         try
         {
             Logger.Information("Filling input with label '{LabelText}'", labelText);
+
             await Page.FillAsync($"label:text('{labelText}') + input", text);
+
             Logger.Information("Successfully filled input with label '{LabelText}'", labelText);
         }
         catch (Exception ex)

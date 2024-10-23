@@ -1,27 +1,62 @@
 using Microsoft.Playwright;
+using Playground.Base;
 
 namespace Playground.Components;
 
-public class HeaderComponent(IPage page)
+public class HeaderComponent(IPage page) : BaseComponent
 {
-    private readonly IPage _page = page;
-
-    public ILocator SignInLink => _page.Locator("a[href='#/login']");
-    public ILocator HomeLink => _page.Locator("");
-    public ILocator SignUpLink => _page.Locator("");
+    private readonly IPage Page = page;
 
     public async Task ClickSignInAsync()
     {
-        await SignInLink.ClickAsync();
+        try
+        {
+            Logger.Information("Clicking 'Sign In' element in header");
+
+            await Page.ClickAsync("a[href='/login']");
+
+            Logger.Information("Successfully clicked 'Sign In' element in header");
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e, "Failed to click 'Sign In' element in header");
+            throw;
+        }
+
     }
 
     public async Task ClickHomeAsync()
     {
-        await HomeLink.ClickAsync();
+        try
+        {
+            Logger.Information("Clicking 'Home' element in header");
+
+            await Page.ClickAsync("a[href='/']");
+
+            Logger.Information("Successfully clicked 'Home' element in header");
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e, "Failed to click 'Home' element in header");
+            throw;
+        }
+
     }
 
     public async Task ClickSignUpAsync()
     {
-        await SignUpLink.ClickAsync();
+        try
+        {
+            Logger.Information("Clicking 'Sign Up' element in header");
+
+            await Page.ClickAsync("a[href='/register']");
+
+            Logger.Information("Successfully clicked 'Sign Up' element in header");
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e, "Failed to click 'Sign Up' element in header");
+            throw;
+        }
     }
 }
