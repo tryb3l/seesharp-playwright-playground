@@ -1,16 +1,15 @@
-using Playground.Pages;
+using Playground.Base;
 
 namespace Playground.Tests;
 
 [TestFixture]
-public class SmokeTests : PageTest
+public class SmokeTests : BaseTest
 {
     [Test]
     [Category("NotSignedIn")]
     public async Task SmokeTest_OpenLoginPage_Succesfull()
     {
-        var loginPage = new LoginPage(Page);
-        await loginPage.NavigateAsync();
+        await NavigationService.GoToLoginPageAsync();
         var title = await Page.TitleAsync();
         Equals("Sign In", title);
     }
