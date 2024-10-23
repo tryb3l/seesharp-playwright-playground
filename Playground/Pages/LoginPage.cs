@@ -1,5 +1,6 @@
 using Microsoft.Playwright;
 using Playground.Components;
+using Playground.Base;
 using Playground.Config;
 
 namespace Playground.Pages;
