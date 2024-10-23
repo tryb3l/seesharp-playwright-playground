@@ -2,7 +2,7 @@ using Microsoft.Playwright;
 using Playground.Config;
 using Serilog;
 
-namespace Playground.Pages;
+namespace Playground.Base;
 
 public abstract class BasePage(IPage page)
 {

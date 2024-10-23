@@ -1,6 +1,6 @@
 using Serilog;
 
-namespace Playground.Components;
+namespace Playground.Base;
 
 public class BaseComponent
 {

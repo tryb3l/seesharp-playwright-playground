@@ -2,9 +2,10 @@ using Microsoft.Playwright;
 using Playground.Config;
 using Playground.Factories;
 using Playground.Helpers;
+using Playground.Services;
 using Serilog;
 
-namespace Playground.Tests;
+namespace Playground.Base;
 
 public class BaseTest
 {
@@ -12,6 +13,7 @@ public class BaseTest
     protected IBrowser Browser;
     protected ILogger Logger;
     protected ConfigSettings? Config;
+    protected NavigationService NavigationService;
 
     [SetUp]
     public async Task Setup()
@@ -54,6 +56,11 @@ public class BaseTest
         var context = await Browser.NewContextAsync(contextOptions);
         Page = await context.NewPageAsync();
 
+        NavigationService = new NavigationService(Page);
+
+        Logger.Information("Browser launched.");
+
+        await NavigationService.GoToHomePageAsync();
     }
 
     [TearDown]
